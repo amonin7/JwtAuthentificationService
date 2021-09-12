@@ -13,18 +13,22 @@ public class UserDetailsImpl implements UserDetails {
     private String username;
     @JsonIgnore
     private String password;
+    @JsonIgnore
+    private String jwt;
 
-    public UserDetailsImpl(Long id, String username, String password) {
+    public UserDetailsImpl(Long id, String username, String password, String jwt) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.jwt = jwt;
     }
 
     public static UserDetailsImpl build(User user) {
         return new UserDetailsImpl(
                 user.getId(),
                 user.getUsername(),
-                user.getPassword()
+                user.getPassword(),
+                user.getJwt()
         );
     }
 
@@ -45,6 +49,10 @@ public class UserDetailsImpl implements UserDetails {
 
     public Long getId() {
         return id;
+    }
+
+    public String getJwt() {
+        return jwt;
     }
 
     @Override

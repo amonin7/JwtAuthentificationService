@@ -22,4 +22,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return UserDetailsImpl.build(user);
     }
+
+    public void setUserJwt(String username, String jwt) {
+        User user = repository
+                .findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User with username: " + username + " was not found"));
+
+        user.setJwt(jwt);
+        repository.save(user);
+    }
+
+    public String loadUserJwtByUsername(String username) throws UsernameNotFoundException {
+        User user = repository
+                .findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User with username: " + username + " was not found"));
+        return user.getJwt();
+    }
 }
