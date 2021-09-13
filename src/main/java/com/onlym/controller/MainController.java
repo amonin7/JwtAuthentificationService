@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.*;
 public class MainController {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    public AuthenticationManager authenticationManager;
     @Autowired
-    private UserRepository userRepository;
+    public UserRepository userRepository;
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public PasswordEncoder passwordEncoder;
     @Autowired
-    private JwtUtils jwtUtils;
+    public JwtUtils jwtUtils;
 
     @PostMapping("/login")
     public ResponseEntity<?> authUser(@RequestBody LoginRequest loginRequest) {
