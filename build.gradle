@@ -13,13 +13,13 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
-    testImplementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.4'
+	implementation 'org.springframework.boot:spring-boot-starter-security:2.5.4'
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.5.4'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools:2.5.4'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
+	testImplementation 'org.springframework.security:spring-security-test:5.5.1'
+    implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
 
     //for JWT
     implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
@@ -32,6 +32,8 @@ dependencies {
     implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.8.0-M1'
     testImplementation group: 'org.jmock', name: 'jmock-junit4', version: '2.12.0'
+    testImplementation group: 'org.springframework.security', name: 'spring-security-test', version: '5.5.2'
+    implementation group: 'com.jayway.jsonpath', name: 'json-path', version: '2.6.0'
 
 }
 
