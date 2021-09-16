@@ -29,6 +29,23 @@ public class MainController {
     @Autowired
     public JwtUtils jwtUtils;
 
+    @PostMapping("/register")
+    public ResponseEntity<?> createUser(@RequestBody RegistrationRequest registrationRequest) {
+        if (userRepository.existsByUsername(registrationRequest.getUsername())) {
+            return ResponseEntity.badRequest().body(
+                    new MessageResponse("Error: user with such username already exists")
+            );
+        }
+        User user = new User(
+                registrationRequest.getUsername(),
+                passwordEncoder.encode(registrationRequest.getPassword())
+        );
+        userRepository.save(user);
+        return ResponseEntity.ok(
+                new MessageResponse("User with username: '" + user.getUsername() + "' has been created")
+        );
+    }
+
     @PostMapping("/login")
     public ResponseEntity<?> authUser(@RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager
@@ -46,23 +63,6 @@ public class MainController {
                 jwt,
                 userDetails.getUsername()
         ));
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<?> createUser(@RequestBody RegistrationRequest registrationRequest) {
-        if (userRepository.existsByUsername(registrationRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(
-                    new MessageResponse("Error: user with such username already exists")
-            );
-        }
-        User user = new User(
-                registrationRequest.getUsername(),
-                passwordEncoder.encode(registrationRequest.getPassword())
-        );
-        userRepository.save(user);
-        return ResponseEntity.ok(
-                new MessageResponse("User with username: '" + user.getUsername() + "' has been created")
-        );
     }
 
     @GetMapping("/hello")
